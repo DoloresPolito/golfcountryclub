@@ -1,0 +1,87 @@
+@use "sass:math";
+@use "abstracts" as *;
+
+// El título escala con el ancho para quedar en una línea.
+// "PÁDEL EN EL CLUB" en Anton mide 6.5em de ancho; ocupa ~68% del ancho.
+$title-width-em: 6.5;
+$title-ratio: 68;
+$title-size: math.div($title-ratio, $title-width-em) * 1cqi;
+
+// La pelota se superpone a la parte baja del título
+$ball-size: $title-size * 1.28;
+$ball-overlap: $title-size * 0.36;
+
+.padel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: calc(#{$nav-sticky-top + $nav-height} + #{space(7)}) $container-gutter space(9);
+  container-type: inline-size;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    $sage-300 0%,
+    $sage-400 55%,
+    $sage-500 100%
+  );
+  color: $ink-950;
+  text-align: center;
+  // La pelota entra desde abajo: se recorta en el borde de la sección
+  overflow: clip;
+}
+
+.title {
+  font-size: $title-size;
+  line-height: 0.9;
+  white-space: nowrap;
+  color: $ink-950;
+
+  @include mq-down(md) {
+    font-size: math.div(88, $title-width-em) * 1cqi;
+  }
+}
+
+.ball {
+  position: relative;
+  z-index: 1;
+  width: $ball-size;
+  height: auto;
+  margin-top: -$ball-overlap;
+  filter: drop-shadow(0 1.2cqi 1.4cqi rgba($ink-950, 0.22));
+
+  // Se mueve con el scroll (--parallax va de -1 a 1, ver Parallax.tsx):
+  // sube girando desde abajo de la sección, frena al quedar centrada sobre
+  // el título y, al salir, sigue subiendo apenas.
+  &[data-parallax] {
+    --enter: max(-1 * var(--parallax, 0), 0);
+    --leave: max(var(--parallax, 0), 0);
+    translate: 0
+      calc(var(--enter) * var(--enter) * 60svh - var(--leave) * 10svh);
+    rotate: calc(var(--parallax, 0) * 120deg);
+    will-change: translate, rotate;
+  }
+
+  @include mq-down(md) {
+    width: math.div(88, $title-width-em) * 1.28cqi;
+    margin-top: math.div(88, $title-width-em) * -0.36cqi;
+  }
+}
+
+.text {
+  // Texto y botón quedan por delante de la pelota mientras sube
+  position: relative;
+  z-index: 2;
+  max-width: 37ch;
+  margin-top: space(6);
+  font-family: $font-mono;
+  font-size: rem(15);
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+.button {
+  position: relative;
+  z-index: 2;
+  margin-top: space(6);
+}

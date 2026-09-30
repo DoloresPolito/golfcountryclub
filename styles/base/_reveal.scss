@@ -1,0 +1,62 @@
+// ==========================================================================
+// Animación de entrada al scrollear (ver components/layout/ScrollReveal)
+//
+// - `data-reveal`: el elemento aparece con un fundido lento y sube apenas.
+// - `data-reveal="words"`: lo mismo, pero palabra por palabra (los títulos,
+//   junto con <RevealWords>).
+// - `data-reveal="zoom"`: fotos de fondo; no se ocultan, solo se asientan con
+//   un zoom lento (anima `scale`, ver _parallax.scss).
+//
+// La curva arranca rápido y se asienta muy despacio.
+// Solo se ocultan si el script de <head> agregó la clase `reveal` al <html>,
+// así sin JS (o con movimiento reducido) el contenido se ve igual.
+// Se usan animaciones y no transiciones para no pisar los hovers.
+// ==========================================================================
+@use "../abstracts" as *;
+
+$reveal-ease: cubic-bezier(0.19, 1, 0.22, 1);
+$reveal-duration: 1800ms;
+$reveal-word-gap: 70ms;
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(#{rem(12)});
+  }
+}
+
+@keyframes reveal-zoom {
+  from {
+    scale: 1.24;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal [data-reveal]:not([data-reveal="words"], [data-reveal="zoom"]),
+  .reveal [data-reveal="words"] [data-word] {
+    opacity: 0;
+  }
+
+  .reveal
+    [data-reveal].is-revealed:not([data-reveal="words"], [data-reveal="zoom"]) {
+    opacity: 1;
+    animation: reveal-up $reveal-duration $reveal-ease var(--reveal-delay, 0ms)
+      both;
+  }
+
+  .reveal [data-reveal="words"] [data-word] {
+    display: inline-block;
+  }
+
+  .reveal [data-reveal="words"].is-revealed [data-word] {
+    opacity: 1;
+    animation: reveal-up $reveal-duration $reveal-ease both;
+    animation-delay: calc(
+      var(--reveal-delay, 0ms) + var(--w) * #{$reveal-word-gap}
+    );
+  }
+
+  .reveal [data-reveal="zoom"].is-revealed {
+    animation: reveal-zoom 2600ms $reveal-ease both;
+  }
+}

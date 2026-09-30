@@ -1,0 +1,183 @@
+@use "abstracts" as *;
+
+$text: $green-900;
+$line: rgba($green-900, 0.14);
+
+.torneos {
+  padding-block: space(9);
+  container-type: inline-size;
+  background-color: $cream-50;
+  color: $text;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: space(9);
+  padding-inline: clamp(#{rem(20)}, 6cqi, #{rem(100)});
+}
+
+.groupTitle {
+  display: flex;
+  align-items: baseline;
+  gap: space(3);
+  padding-bottom: space(3);
+  border-bottom: 1px solid rgba($green-900, 0.6);
+  font-family: $font-mono;
+  font-size: rem(14);
+  font-weight: $fw-medium;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: $text;
+}
+
+.count {
+  font-size: rem(11);
+  opacity: 0.55;
+}
+
+.list {
+  margin: 0;
+}
+
+// Fila de torneo -----------------------------------------------------------
+.item {
+  display: grid;
+  grid-template-columns:
+    clamp(#{rem(64)}, 6cqi, #{rem(100)}) minmax(0, 1fr)
+    auto;
+  align-items: start;
+  column-gap: clamp(#{rem(16)}, 3cqi, #{rem(48)});
+  padding-block: space(5);
+  // Deja lugar para la navbar fija al llegar desde un link (#slug)
+  scroll-margin-top: $nav-sticky-top + $nav-height + 16px;
+
+  & + & {
+    border-top: 1px solid $line;
+  }
+
+  @include mq-down(md) {
+    grid-template-columns: rem(56) minmax(0, 1fr);
+    row-gap: space(4);
+  }
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: space(1);
+  font-size: rem(12);
+  font-weight: $fw-semibold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.day {
+  font-family: $font-display;
+  font-size: clamp(#{rem(36)}, 3cqi, #{rem(50)});
+  font-weight: $fw-regular;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.info {
+  padding-top: space(1);
+}
+
+.name {
+  font-size: clamp(#{rem(22)}, 2cqi, #{rem(32)});
+  line-height: 1.05;
+  color: $text;
+}
+
+.meta {
+  margin-top: space(2);
+  font-size: rem(12);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+// Ganadores por categoría
+.winners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(3) space(7);
+  margin: space(4) 0 0;
+
+  dt {
+    font-size: rem(10);
+    font-weight: $fw-medium;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $gold-600;
+  }
+
+  dd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: space(2);
+    margin: space(1) 0 0;
+    font-size: rem(15);
+    font-weight: $fw-semibold;
+  }
+}
+
+.score {
+  font-family: $font-mono;
+  font-size: rem(11);
+  font-weight: $fw-regular;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.action {
+  align-self: center;
+
+  @include mq-down(md) {
+    grid-column: 2;
+    align-self: start;
+  }
+}
+
+.link {
+  @include transition(background-color, color);
+  display: inline-flex;
+  align-items: center;
+  gap: space(3);
+  min-height: rem(44);
+  padding-inline: space(4);
+  border: 1px solid rgba($green-900, 0.45);
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: rem(11);
+  font-weight: $fw-medium;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  svg {
+    @include transition(transform);
+    font-size: rem(14);
+  }
+
+  &:hover {
+    background-color: $green-800;
+    color: $cream-50;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+.tag {
+  font-family: $font-mono;
+  font-size: rem(11);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.6;
+}

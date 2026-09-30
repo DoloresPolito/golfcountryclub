@@ -1,0 +1,186 @@
+@use "abstracts" as *;
+
+$text: $cream-50;
+
+.quincho {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  // Deja lugar para la navbar fija
+  padding-block: calc(#{$nav-sticky-top + $nav-height} + #{space(7)}) space(8);
+  overflow: hidden;
+  isolation: isolate;
+  container-type: inline-size;
+  background-color: #1f1c14;
+  color: $text;
+
+  // Oscurece el lado del texto con un tono cálido
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      rgba(#1e1a10, 0.72) 0%,
+      rgba(#1e1a10, 0.5) 32%,
+      rgba(#1e1a10, 0.1) 58%,
+      rgba(#1e1a10, 0) 100%
+    );
+  }
+}
+
+.bg {
+  z-index: -3;
+  object-fit: cover;
+  object-position: 65% center;
+}
+
+// Blur que se desvanece hacia la derecha
+.blur {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  mask-image: linear-gradient(90deg, #000 0%, #000 28%, transparent 50%);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 28%,
+    transparent 50%
+  );
+
+  @include mq-down(md) {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+// Etiqueta de la esquina superior derecha
+.corner {
+  position: absolute;
+  top: calc(#{$nav-sticky-top + $nav-height} + #{space(5)});
+  right: clamp(#{rem(20)}, 2cqi, #{rem(32)});
+  display: flex;
+  align-items: center;
+  gap: space(3);
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+    width: rem(64);
+    height: 1px;
+    background-color: currentColor;
+  }
+
+  @include mq-down(md) {
+    display: none;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding-inline: clamp(#{rem(20)}, 5cqi, #{rem(80)});
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: space(3);
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrowLine {
+  width: rem(32);
+  height: 1px;
+  background-color: currentColor;
+}
+
+.title {
+  margin-top: space(7);
+  font-size: clamp(#{rem(64)}, 6.6cqi, #{rem(104)});
+  line-height: 0.92;
+  color: $text;
+}
+
+.subtitle {
+  margin-top: space(4);
+  font-size: rem(12);
+  font-weight: $fw-medium;
+  letter-spacing: 0.28em;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+    display: block;
+    width: rem(52);
+    height: 1px;
+    margin-top: space(3);
+    background-color: currentColor;
+  }
+}
+
+.text {
+  max-width: 44ch;
+  margin-top: space(3);
+  font-size: rem(13);
+  line-height: 1.4;
+}
+
+.events {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: space(3);
+  margin: space(5) 0 0;
+}
+
+.event {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: clamp(#{rem(12)}, 1.6cqi, #{rem(24)});
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  & + & {
+    border-left: 1px solid rgba($cream-100, 0.7);
+  }
+}
+
+.button {
+  min-width: rem(290);
+  margin-top: space(5);
+  background-color: rgba(#3e5a2c, 0.75);
+
+  @include mq-down(sm) {
+    align-self: stretch;
+    min-width: 0;
+  }
+}
+
+// Separador vertical entre ícono y texto
+.sep {
+  width: 1px;
+  height: rem(26);
+  background-color: currentColor;
+  opacity: 0.5;
+}

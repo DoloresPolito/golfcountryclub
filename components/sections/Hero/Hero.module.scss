@@ -1,0 +1,98 @@
+@use "sass:math";
+@use "abstracts" as *;
+
+// El título escala con el ancho del hero para ocupar siempre una sola línea.
+// "GOLF COUNTRY CLUB" en Anton mide 7.31em de ancho.
+$title-width-em: 7.31;
+$title-side: 5; // margen lateral en % del ancho
+$title-size: math.div(100 - $title-side * 2, $title-width-em) * 1cqi;
+$title-line-height: 0.9;
+
+$content-top: 4cqi;
+$content-gap: 2cqi;
+$button-height: rem(52);
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  container-type: inline-size;
+  background-color: $sky;
+}
+
+// La foto se ancla arriba y se recorta por abajo. En pantallas angostas-anchas
+// se desplaza hacia abajo para que los botones queden siempre sobre el jugador;
+// el espacio de arriba se completa con el color del cielo.
+.media {
+  position: absolute;
+  inset: 0;
+  top: max(0px, calc(#{rem(90)} - 5.6cqi));
+  z-index: -1;
+  // Recorta el zoom de entrada: si no, la foto agrandada asoma por encima
+  // del degradé del cielo como una franja arriba
+  overflow: hidden;
+  // Al scrollear la foto baja más lento que la página (ver Parallax)
+  --parallax-range: 18%;
+
+  // Lavado claro sobre el cielo: sólido arriba para fundirse con el fondo
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      $sky 0%,
+      rgba($sky, 0.7) 20%,
+      rgba($sky, 0.35) 42%,
+      rgba($sky, 0) 65%
+    );
+  }
+}
+
+.bg {
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.85);
+  // Al entrar a la web la foto aparece desde el cielo y se asienta con zoom
+  animation: hero-in 2800ms cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    scale: 1.15;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $content-gap;
+  padding-top: $content-top;
+  text-align: center;
+
+  @include mq-down(md) {
+    gap: space(5);
+  }
+}
+
+.title {
+  font-size: $title-size;
+  line-height: $title-line-height;
+  white-space: nowrap;
+  color: $green-900;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: space(3);
+  padding-inline: $container-gutter;
+
+  > * {
+    min-height: $button-height;
+  }
+}

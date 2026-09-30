@@ -1,0 +1,9 @@
+// ==========================================================================
+// Estilos globales — se importa una sola vez en app/layout.tsx
+// ==========================================================================
+@use "base/reset";
+@use "base/root";
+@use "base/typography";
+@use "base/utilities";
+@use "base/reveal";
+@use "base/parallax";

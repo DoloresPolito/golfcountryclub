@@ -1,0 +1,140 @@
+@use "abstracts" as *;
+
+$text: $cream-50;
+
+.colonia {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  // Deja lugar para la navbar fija
+  padding-block: calc(#{$nav-sticky-top + $nav-height} + #{space(7)}) space(8);
+  overflow: hidden;
+  isolation: isolate;
+  container-type: inline-size;
+  background-color: #2b2a1f;
+  color: $text;
+
+  // Oscurece el lado izquierdo (texto) y deja ver el tobogán a la derecha
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(#1c1a10, 0.78) 0%,
+        rgba(#1c1a10, 0.6) 38%,
+        rgba(#1c1a10, 0.15) 70%,
+        rgba(#1c1a10, 0) 100%
+      ),
+      rgba(#2a2412, 0.2);
+  }
+}
+
+.bg {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 80% center;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding-inline: clamp(#{rem(20)}, 6cqi, #{rem(100)});
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  font-size: rem(11);
+  font-weight: $fw-medium;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.eyebrowLine {
+  width: rem(48);
+  height: 1px;
+  background-color: currentColor;
+}
+
+.title {
+  margin-top: space(7);
+  font-size: clamp(#{rem(76)}, 12cqi, #{rem(180)});
+  line-height: 0.85;
+  color: $text;
+}
+
+.activities {
+  max-width: 44ch;
+  margin-top: space(4);
+  font-size: clamp(#{rem(12)}, 0.95cqi, #{rem(14)});
+  font-weight: $fw-bold;
+  letter-spacing: 0.16em;
+  line-height: 1.55;
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+    display: block;
+    width: rem(48);
+    height: 1px;
+    margin-top: space(5);
+    background-color: currentColor;
+  }
+}
+
+.lead {
+  margin-top: space(5);
+  font-size: rem(12);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  strong {
+    font-weight: $fw-bold;
+  }
+}
+
+.text {
+  margin-top: space(3);
+  font-size: rem(13);
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(4);
+  margin-top: space(6);
+
+  @include mq-down(sm) {
+    flex-direction: column;
+    align-self: stretch;
+  }
+}
+
+.button {
+  min-width: rem(290);
+
+  &:last-child {
+    min-width: rem(250);
+  }
+
+  @include mq-down(sm) {
+    min-width: 0;
+  }
+}
+
+// Separador vertical entre ícono y texto
+.sep {
+  width: 1px;
+  height: rem(26);
+  background-color: currentColor;
+  opacity: 0.5;
+}

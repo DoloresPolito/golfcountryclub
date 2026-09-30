@@ -1,0 +1,86 @@
+@use "abstracts" as *;
+
+$text: $cream-50;
+
+.header {
+  padding: calc(#{$nav-sticky-top + $nav-height} + #{space(9)}) 0 space(8);
+  container-type: inline-size;
+  background-color: $green-900;
+  color: $text;
+
+  @include mq-down(lg) {
+    padding-top: calc(#{rem(12) + rem(72)} + #{space(8)});
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-inline: clamp(#{rem(20)}, 6cqi, #{rem(100)});
+}
+
+.back {
+  @include transition(opacity);
+  display: inline-flex;
+  align-items: center;
+  gap: space(2);
+  margin-bottom: space(6);
+  font-family: $font-mono;
+  font-size: rem(11);
+  font-weight: $fw-medium;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:hover .backArrow {
+    translate: -3px 0;
+  }
+}
+
+.backArrow {
+  @include transition(translate);
+  rotate: 180deg;
+  font-size: rem(14);
+}
+
+// Etiqueta con línea, como los eyebrows de las secciones
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    width: rem(34);
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.6;
+  }
+}
+
+.title {
+  margin-top: space(4);
+  font-size: clamp(#{rem(44)}, 6.4cqi, #{rem(104)});
+  line-height: 0.95;
+  color: $text;
+}
+
+.text {
+  max-width: 46ch;
+  margin-top: space(5);
+  font-size: rem(12);
+  font-weight: $fw-medium;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
+  text-transform: uppercase;
+  color: rgba($cream-100, 0.85);
+}

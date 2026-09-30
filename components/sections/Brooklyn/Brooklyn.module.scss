@@ -1,0 +1,150 @@
+@use "abstracts" as *;
+
+$gold: #d6a23a;
+$text: $ink-900;
+$line: rgba($ink-900, 0.3);
+
+.brooklyn {
+  padding-block: space(10);
+  container-type: inline-size;
+  background-color: $cream-50;
+  color: $text;
+  // Al navegar con el ancla, que no quede tapada por la navbar fija
+  scroll-margin-top: $nav-sticky-top + $nav-height;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: clamp(#{rem(20)}, 4cqi, #{rem(64)});
+
+  > * + * {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding-left: clamp(#{rem(20)}, 3cqi, #{rem(48)});
+    border-left: 1px solid $line;
+  }
+
+  > * {
+    padding-right: clamp(#{rem(20)}, 3cqi, #{rem(48)});
+  }
+
+  > *:last-child {
+    padding-right: 0;
+  }
+
+  @include mq-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: space(7);
+
+    > * {
+      padding-right: space(5);
+    }
+
+    // En dos columnas, solo lleva línea el elemento de la derecha
+    > *:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  @include mq-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: space(5);
+
+    > * + * {
+      padding: space(5) 0 0;
+      border-top: 1px solid $line;
+      border-left: 0;
+    }
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: $gold;
+}
+
+.title {
+  margin-top: space(1);
+  font-size: clamp(#{rem(52)}, 5.2cqi, #{rem(80)});
+  line-height: 0.95;
+  color: $gold;
+}
+
+.tagline {
+  max-width: 26ch;
+  font-size: rem(13);
+  font-weight: $fw-medium;
+  letter-spacing: 0.16em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.detail {
+  gap: space(4);
+  align-items: center;
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: rem(26);
+}
+
+.label {
+  font-family: $font-sans;
+  font-size: rem(10);
+  font-weight: $fw-bold;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  color: $text;
+}
+
+.value {
+  display: block;
+  margin-top: space(1);
+  font-size: rem(13);
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  color: $ink-700;
+}
+
+.button {
+  min-width: rem(270);
+
+  @include mq-down(sm) {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+// Separador vertical entre ícono y texto
+.sep {
+  width: 1px;
+  height: rem(26);
+  background-color: currentColor;
+  opacity: 0.5;
+}

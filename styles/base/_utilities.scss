@@ -1,0 +1,21 @@
+// ==========================================================================
+// Utilidades globales (mínimas, el resto va en CSS Modules)
+// ==========================================================================
+@use "../abstracts" as *;
+
+.container {
+  @include container;
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.eyebrow {
+  font-family: $font-sans;
+  font-size: rem(13);
+  font-weight: $fw-semibold;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}

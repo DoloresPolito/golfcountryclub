@@ -1,0 +1,19 @@
+// ==========================================================================
+// Parallax de las fotos de fondo (ver components/layout/Parallax)
+//
+// - `data-parallax`: se desplaza según `--parallax-range` (default 5% de su
+//   alto) mientras la sección cruza la pantalla.
+// - `data-parallax="bg"`: fotos de fondo de sección; se agrandan un poco para
+//   que el desplazamiento nunca deje ver el borde.
+//
+// Usa `translate`/`scale` (y no `transform`) para poder combinarse con la
+// animación de zoom de entrada.
+// ==========================================================================
+[data-parallax] {
+  translate: 0 calc(var(--parallax, 0) * var(--parallax-range, 5%));
+  will-change: translate;
+}
+
+[data-parallax="bg"] {
+  scale: 1.12;
+}

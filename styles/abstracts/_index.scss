@@ -1,0 +1,5 @@
+// Punto de entrada de las herramientas de Sass (no genera CSS).
+// En cualquier .module.scss: @use "abstracts" as *;
+@forward "variables";
+@forward "functions";
+@forward "mixins";

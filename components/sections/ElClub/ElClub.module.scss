@@ -1,0 +1,138 @@
+@use "abstracts" as *;
+
+$title: #1c2a1e;
+$olive: #4f6236;
+$slide-size: clamp(#{rem(220)}, 25vw, #{rem(440)});
+$slide-gap: rem(8);
+
+.club {
+  padding-top: space(9);
+  padding-bottom: space(4);
+  container-type: inline-size;
+  background-color: $cream-100;
+  color: $ink-900;
+  scroll-margin-top: $nav-sticky-top + $nav-height;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: space(7);
+  padding-inline: clamp(#{rem(20)}, 5cqi, #{rem(80)});
+
+  @include mq-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: space(6);
+  }
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  font-family: $font-mono;
+  font-size: rem(11);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $olive;
+}
+
+.eyebrowLine {
+  width: rem(48);
+  height: 1px;
+  background-color: currentColor;
+}
+
+.title {
+  margin-top: space(5);
+  font-size: clamp(#{rem(44)}, 5.4cqi, #{rem(84)});
+  line-height: 0.95;
+  color: $title;
+}
+
+.accent {
+  color: $olive;
+}
+
+.text {
+  max-width: 52ch;
+  margin-top: space(4);
+  font-family: $font-mono;
+  font-size: rem(12);
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.aside {
+  max-width: 30ch;
+  padding-block: space(5);
+  padding-left: space(6);
+  border-left: 1px solid rgba($ink-900, 0.35);
+  font-size: rem(14);
+  line-height: 1.5;
+  color: $ink-700;
+
+  @include mq-down(lg) {
+    padding-block: 0;
+    padding-left: space(4);
+  }
+}
+
+// Carrusel --------------------------------------------------------------
+.carousel {
+  margin-top: space(7);
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  animation: marquee calc(var(--count) * 5s) linear infinite;
+
+  .carousel:hover & {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.slide {
+  flex-shrink: 0;
+  // Padding en vez de gap para que -50% sea exactamente una vuelta
+  padding-right: $slide-gap;
+}
+
+.frame {
+  position: relative;
+  width: $slide-size;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: $sage-400;
+
+  .slide:nth-child(3n + 2) & {
+    background-color: $sage-500;
+  }
+
+  .slide:nth-child(3n) & {
+    background-color: $sage-300;
+  }
+
+  @include mq-down(md) {
+    width: 70vw;
+  }
+}
+
+.photo {
+  object-fit: cover;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}

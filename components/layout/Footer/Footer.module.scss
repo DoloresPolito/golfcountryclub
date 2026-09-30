@@ -1,0 +1,213 @@
+@use "abstracts" as *;
+
+$side: 5; // margen lateral en % del ancho
+
+$line: rgba($ink-950, 0.18);
+
+// Mismo fondo que la sección de pádel
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: space(8);
+  padding: space(9) $side * 1cqi space(5);
+  container-type: inline-size;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    $sage-300 0%,
+    $sage-400 55%,
+    $sage-500 100%
+  );
+  color: $ink-950;
+
+  @include mq-down(md) {
+    padding-inline: $container-gutter;
+  }
+}
+
+// Columnas ------------------------------------------------------------------
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  column-gap: clamp(#{rem(24)}, 4cqi, #{rem(64)});
+  row-gap: space(7);
+
+  @include mq-down(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include mq-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: space(5);
+
+  @include mq-down(lg) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.logo {
+  width: auto;
+  height: rem(72);
+}
+
+.tagline {
+  max-width: 22ch;
+  font-size: rem(12);
+  font-weight: $fw-medium;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: space(4);
+}
+
+// Etiqueta con línea, como los eyebrows de las secciones
+.label {
+  display: flex;
+  align-items: center;
+  gap: space(3);
+  font-family: $font-sans;
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  line-height: 1.4;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: inherit;
+
+  &::before {
+    content: "";
+    width: rem(24);
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.6;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: space(2);
+  margin: 0;
+}
+
+// Mismo subrayado animado que los links de la navbar
+.link {
+  position: relative;
+  font-family: $font-mono;
+  font-size: rem(12);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  &::after {
+    @include transition(transform);
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: rem(-3);
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.whatsapp {
+  @include transition(background-color, color);
+  display: inline-flex;
+  align-items: center;
+  gap: space(3);
+  min-height: rem(44);
+  padding-inline: space(4);
+  border: 1px solid rgba($ink-950, 0.45);
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: rem(12);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  svg {
+    flex-shrink: 0;
+    width: rem(16);
+    height: rem(16);
+  }
+
+  &:hover {
+    background-color: $olive-600;
+    border-color: $olive-600;
+    color: $cream-50;
+  }
+
+  &:hover .arrow {
+    transform: translateX(3px);
+  }
+}
+
+.arrow {
+  @include transition(transform);
+}
+
+// Pie ------------------------------------------------------------------------
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: space(3);
+  padding-top: space(4);
+  border-top: 1px solid $line;
+  font-family: $font-mono;
+  font-size: rem(11);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba($ink-950, 0.7);
+}
+
+.credit {
+  @include transition(color);
+  text-decoration: underline;
+  text-decoration-color: rgba($ink-950, 0.35);
+  text-underline-offset: 3px;
+
+  &:hover {
+    color: $ink-950;
+    text-decoration-color: currentColor;
+  }
+}
+
+.backTop {
+  @include transition(color);
+  display: inline-flex;
+  align-items: center;
+  gap: space(2);
+
+  &:hover {
+    color: $ink-950;
+  }
+
+  &:hover .arrowUp {
+    translate: 0 -3px;
+  }
+}
+
+.arrowUp {
+  @include transition(translate);
+  rotate: -90deg;
+}

@@ -1,0 +1,102 @@
+@use "abstracts" as *;
+
+$olive: #3b4d2c;
+$text: $ink-900;
+
+.socios {
+  display: flex;
+  align-items: center;
+  min-height: clamp(#{rem(360)}, 40vw, #{rem(560)});
+  padding-block: space(9);
+  container-type: inline-size;
+  background-color: $cream-50;
+  color: $text;
+  scroll-margin-top: $nav-sticky-top + $nav-height;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: auto 1px auto 1fr;
+  align-items: center;
+  column-gap: clamp(#{rem(20)}, 2.6cqi, #{rem(40)});
+  width: 100%;
+  padding-inline: clamp(#{rem(20)}, 5cqi, #{rem(80)});
+
+  @include mq-down(lg) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: space(5);
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: space(5);
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    width: rem(34);
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.6;
+  }
+}
+
+.title {
+  margin-top: space(3);
+  font-size: clamp(#{rem(44)}, 5.4cqi, #{rem(84)});
+  line-height: 0.95;
+  color: $olive;
+}
+
+.divider {
+  align-self: stretch;
+  margin-block: space(4);
+  background-color: rgba($ink-900, 0.3);
+
+  @include mq-down(lg) {
+    display: none;
+  }
+}
+
+.text {
+  max-width: 26ch;
+  font-size: rem(12);
+  font-weight: $fw-medium;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.button {
+  justify-self: end;
+  min-width: rem(290);
+
+  @include mq-down(lg) {
+    justify-self: start;
+    margin-top: space(2);
+  }
+
+  @include mq-down(sm) {
+    justify-self: stretch;
+    min-width: 0;
+  }
+}
+
+// Separador vertical entre ícono y texto
+.sep {
+  width: 1px;
+  height: rem(26);
+  background-color: currentColor;
+  opacity: 0.5;
+}

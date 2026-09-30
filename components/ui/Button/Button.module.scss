@@ -1,0 +1,143 @@
+@use "abstracts" as *;
+
+.button {
+  @include flex-center;
+  @include transition(background-color, border-color, color);
+  gap: space(4);
+  min-height: rem(52);
+  padding-inline: rem(44);
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: rem(15);
+  font-weight: $fw-medium;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  @include mq-down(sm) {
+    min-height: rem(46);
+    padding-inline: rem(20);
+    font-size: rem(13);
+  }
+}
+
+.primary {
+  background-color: $green-800;
+  color: $cream-50;
+
+  &:hover {
+    background-color: $green-700;
+  }
+}
+
+.outline {
+  border-color: rgba($green-900, 0.35);
+  background-color: rgba($white, 0.08);
+  color: $green-900;
+
+  &:hover {
+    border-color: $green-900;
+    background-color: rgba($white, 0.3);
+  }
+}
+
+.leaf {
+  min-height: rem(54);
+  padding-inline: rem(34);
+  font-size: rem(13);
+  border-color: rgba($green-300, 0.45);
+  border-radius: $radius-lg;
+  background-color: $leaf-600;
+  color: $cream-50;
+
+  svg {
+    @include transition(transform);
+    font-size: 1.2em;
+  }
+
+  &:hover {
+    background-color: $leaf-500;
+
+    svg {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.olive {
+  min-height: rem(48);
+  min-width: rem(250);
+  font-size: rem(14);
+  background-color: $olive-600;
+  color: $cream-50;
+
+  &:hover {
+    background-color: $olive-500;
+  }
+}
+
+// Botones pill con ícono | texto → (sección Colonia) ------------------------
+.moss,
+.cream,
+.gold {
+  justify-content: space-between;
+  gap: space(5);
+  min-height: rem(60);
+  padding-inline: rem(28);
+  border-radius: $radius-pill;
+  font-family: $font-sans;
+  font-size: rem(11);
+  font-weight: $fw-bold;
+  letter-spacing: 0.1em;
+
+  svg {
+    @include transition(transform);
+    flex-shrink: 0;
+    font-size: rem(20);
+  }
+
+  // Última flecha
+  svg:last-child {
+    margin-left: auto;
+    font-size: rem(18);
+  }
+
+  &:hover svg:last-child {
+    transform: translateX(3px);
+  }
+
+  @include mq-down(sm) {
+    min-height: rem(54);
+    padding-inline: rem(20);
+    font-size: rem(10);
+  }
+}
+
+.moss {
+  border-color: rgba($cream-100, 0.7);
+  background-color: #3e5a2c;
+  color: $cream-50;
+
+  &:hover {
+    background-color: #4a6a35;
+  }
+}
+
+.cream {
+  background-color: $cream-50;
+  color: $green-900;
+
+  &:hover {
+    background-color: $white;
+  }
+}
+
+.gold {
+  background-color: #d6a23a;
+  color: $ink-900;
+
+  &:hover {
+    background-color: #e0b04d;
+  }
+}

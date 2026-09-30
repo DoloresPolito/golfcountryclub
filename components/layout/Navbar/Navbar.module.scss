@@ -1,0 +1,335 @@
+@use "abstracts" as *;
+
+// La barra va justo después del hero en el DOM. Con el margen negativo se
+// superpone al borde inferior del hero; al scrollear sube junto con él y,
+// cuando llega arriba, `sticky` la deja fija.
+.header {
+  position: sticky;
+  top: $nav-sticky-top;
+  z-index: $z-header;
+  height: $nav-height;
+  margin-top: -($nav-height + $nav-offset);
+  margin-bottom: $nav-offset;
+  padding-inline: clamp(#{rem(12)}, 2.6vw, #{rem(40)});
+
+  @include mq-down(lg) {
+    height: rem(72);
+    margin-top: -(rem(72) + rem(16));
+    margin-bottom: rem(16);
+    top: rem(12);
+  }
+}
+
+// En páginas internas no hay hero: la barra arranca fija arriba y el
+// encabezado de la página pasa por debajo
+.page {
+  margin-top: $nav-sticky-top;
+  margin-bottom: -($nav-height + $nav-sticky-top);
+
+  @include mq-down(lg) {
+    margin-top: rem(12);
+    margin-bottom: -(rem(72) + rem(12));
+  }
+}
+
+.bar {
+  @include transition(background-color, border-color, box-shadow);
+  display: flex;
+  align-items: center;
+  gap: clamp(#{rem(16)}, 2.4vw, #{rem(40)});
+  height: 100%;
+  padding-inline: rem(22) rem(12);
+  border: 1px solid rgba($white, 0.45);
+  border-radius: $radius-md;
+  background-color: rgba(#dfe3dc, 0.55);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  color: $green-900;
+
+  @include mq-down(lg) {
+    padding-inline: rem(16) rem(8);
+  }
+
+  .stuck & {
+    border-color: rgba($green-900, 0.08);
+    background-color: rgba($cream-50, 0.92);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Marca ------------------------------------------------------------------
+.brand {
+  display: flex;
+  align-items: center;
+  gap: rem(14);
+  flex-shrink: 0;
+}
+
+.logo {
+  width: auto;
+  height: rem(54);
+
+  @include mq-down(lg) {
+    height: rem(50);
+  }
+}
+
+.brandName {
+  font-family: $font-mono;
+  font-size: rem(16);
+  font-weight: $fw-medium;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  // Con 8 links no entra el nombre en pantallas medianas: queda solo el escudo
+  @media (max-width: 1439.98px) {
+    display: none;
+  }
+}
+
+.divider {
+  align-self: stretch;
+  width: 1px;
+  margin-block: rem(16);
+  background-color: rgba($green-900, 0.25);
+
+  @include mq-down(lg) {
+    display: none;
+  }
+}
+
+// Links ------------------------------------------------------------------
+.links {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: clamp(#{rem(16)}, 2.6vw, #{rem(48)});
+  margin: 0;
+
+  @include mq-down(xl) {
+    gap: 1.4vw;
+  }
+
+  @include mq-down(lg) {
+    display: none;
+  }
+}
+
+.link {
+  @include transition(opacity);
+  position: relative;
+  font-family: $font-mono;
+  font-size: rem(13);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  @include mq-down(xl) {
+    font-size: rem(12);
+    letter-spacing: 0.03em;
+  }
+
+  &::after {
+    @include transition(transform);
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: rem(-6);
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.cta {
+  @include flex-center;
+  @include transition(background-color, color);
+  flex-shrink: 0;
+  height: rem(48);
+  padding-inline: rem(28);
+  border: 1px solid rgba($green-900, 0.45);
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: rem(13);
+  font-weight: $fw-medium;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: $green-800;
+    color: $cream-50;
+  }
+
+  @include mq-down(xl) {
+    padding-inline: rem(18);
+    font-size: rem(12);
+  }
+
+  @include mq-down(lg) {
+    display: none;
+  }
+}
+
+// Menú mobile --------------------------------------------------------------
+.toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: rem(7);
+  width: rem(48);
+  height: rem(48);
+  margin-left: auto;
+  padding-inline: rem(12);
+
+  span {
+    @include transition(transform);
+    display: block;
+    height: 2px;
+    background-color: currentColor;
+  }
+
+  &[aria-expanded="true"] {
+    span:first-child {
+      transform: translateY(rem(4.5)) rotate(45deg);
+    }
+
+    span:last-child {
+      transform: translateY(rem(-4.5)) rotate(-45deg);
+    }
+  }
+
+  @include mq-down(lg) {
+    display: flex;
+  }
+}
+
+// El panel se abre como un círculo que crece desde el botón (arriba a la
+// derecha) y los links suben de a uno. Al cerrar, los links bajan con un
+// escalonado corto y el círculo se cierra desacelerando hasta el botón.
+// Las variables --menu-* las calcula Navbar.tsx al abrir.
+$menu-origin: var(--menu-x, calc(100% - #{rem(44)})) var(--menu-y, #{rem(48)});
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  gap: space(5);
+  // Deja el primer link por debajo de la barra (o del borde superior si la
+  // barra está abajo) y el botón siempre por encima de la barra. Todo se
+  // ajusta al alto de la pantalla para que entre sin scrollear.
+  padding:
+    calc(var(--menu-pt, #{rem(84)}) + #{space(5)})
+    space(6)
+    calc(var(--menu-pb, 0px) + #{space(5)});
+  overflow-y: auto;
+  background-color: $cream-50;
+  visibility: hidden;
+  clip-path: circle(0 at #{$menu-origin});
+  transition:
+    clip-path 650ms cubic-bezier(0.4, 0, 0.2, 1) 150ms,
+    visibility 0s linear 800ms;
+
+  @include mq(lg) {
+    display: none;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: min(#{space(2)}, 0.8svh);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    // Máscara para que el texto aparezca "desde abajo"
+    overflow: hidden;
+  }
+
+  // La línea va en el link para que entre y salga junto con el texto
+  li a {
+    border-bottom: 1px solid rgba($green-900, 0.12);
+    display: flex;
+    align-items: baseline;
+    gap: space(4);
+    padding-block: min(#{space(1)}, 0.4svh) min(#{space(2)}, 1svh);
+    color: $green-900;
+    transform: translateY(105%);
+    transition: transform 380ms cubic-bezier(0.55, 0, 0.75, 0.3);
+    transition-delay: calc(var(--i) * 25ms);
+  }
+}
+
+.menuIndex {
+  font-family: $font-mono;
+  font-size: rem(12);
+  letter-spacing: 0.06em;
+  color: rgba($green-900, 0.5);
+}
+
+.menuLabel {
+  font-family: $font-display;
+  font-size: clamp(#{rem(24)}, 4.6svh, #{rem(38)});
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.menuCta {
+  @include flex-center;
+  flex-shrink: 0;
+  min-height: clamp(#{rem(48)}, 6.5svh, #{rem(56)});
+  margin-top: auto;
+  border-radius: $radius-sm;
+  background-color: $green-800;
+  font-family: $font-mono;
+  font-size: rem(15);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $cream-50;
+  opacity: 0;
+  transform: translateY(rem(16));
+  transition:
+    opacity 300ms ease-in,
+    transform 300ms ease-in;
+}
+
+.menuOpen {
+  visibility: visible;
+  clip-path: circle(150% at #{$menu-origin});
+  transition:
+    clip-path 700ms cubic-bezier(0.65, 0, 0.35, 1),
+    visibility 0s;
+
+  li a,
+  .menuCta {
+    transform: none;
+    opacity: 1;
+    transition:
+      transform 700ms $ease-out,
+      opacity 700ms $ease-out;
+    transition-delay: calc(250ms + var(--i) * 55ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .menuOpen,
+  .menu li a,
+  .menuCta {
+    clip-path: none;
+    transform: none !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}

@@ -1,0 +1,26 @@
+// ==========================================================================
+// Funciones
+// ==========================================================================
+@use "sass:map";
+@use "sass:math";
+@use "variables" as *;
+
+// Espaciado desde la escala: space(4) => 1rem
+@function space($key) {
+  @if not map.has-key($spacers, $key) {
+    @error "El espaciado `#{$key}` no existe en $spacers.";
+  }
+  @return map.get($spacers, $key);
+}
+
+// px a rem: rem(24) => 1.5rem
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+// Tamaño de fuente fluido entre dos viewports: fluid(32, 64)
+@function fluid($min-px, $max-px, $min-vw: 375, $max-vw: 1280) {
+  $slope: math.div($max-px - $min-px, $max-vw - $min-vw);
+  $intercept: $min-px - $slope * $min-vw;
+  @return clamp(#{rem($min-px)}, #{rem($intercept)} + #{$slope * 100}vw, #{rem($max-px)});
+}

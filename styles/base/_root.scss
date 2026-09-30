@@ -1,0 +1,17 @@
+// ==========================================================================
+// Custom properties globales (útiles para cambiar valores en runtime)
+// ==========================================================================
+@use "../abstracts" as *;
+
+:root {
+  --color-bg: #{$cream-50};
+  --color-surface: #{$white};
+  --color-text: #{$ink-900};
+  --color-text-muted: #{$ink-500};
+  --color-primary: #{$green-800};
+  --color-primary-hover: #{$green-700};
+  --color-accent: #{$gold-500};
+  --color-border: #{$cream-200};
+
+  --nav-height: #{$nav-height};
+}

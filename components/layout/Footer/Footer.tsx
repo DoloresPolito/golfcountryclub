@@ -61,7 +61,9 @@ export default function Footer() {
         <div className={styles.col} data-reveal>
           <h2 className={styles.label}>Contacto</h2>
           <a
-            href={whatsappUrl()}
+            href={whatsappUrl({
+              mensaje: "Hola, quisiera hacer una consulta.",
+            })}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.social}

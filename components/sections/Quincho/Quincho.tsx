@@ -45,8 +45,7 @@ export default function Quincho() {
         </h2>
 
         <p className={styles.subtitle} data-reveal>
-          Un entorno único <br />
-          para tus eventos.
+          Un entorno único para tus eventos.
         </p>
 
         <p className={styles.text} data-reveal>
@@ -65,14 +64,17 @@ export default function Quincho() {
         </ul>
 
         <Button
-          href={whatsappUrl()}
+          href={whatsappUrl({
+            mensaje:
+              "Hola, quisiera consultar la disponibilidad del quincho y salón para un evento.",
+          })}
           target="_blank"
           rel="noopener noreferrer"
           variant="moss"
           className={styles.button}
           data-reveal
         >
-          Consultar por WhatsApp
+          Consultar disponibilidad
           <ArrowRight />
         </Button>
       </div>

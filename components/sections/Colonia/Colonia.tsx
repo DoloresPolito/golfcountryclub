@@ -50,7 +50,10 @@ export default function Colonia() {
 
         <div className={styles.actions} data-reveal>
           <Button
-            href={whatsappUrl(TELEFONO)}
+            href={whatsappUrl({
+              numero: TELEFONO,
+              mensaje: "Hola, quisiera recibir información sobre la colonia.",
+            })}
             target="_blank"
             rel="noopener noreferrer"
             variant="moss"

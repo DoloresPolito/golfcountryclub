@@ -111,6 +111,10 @@ export default function Navbar({
 
         <span className={styles.divider} aria-hidden="true" />
 
+        <Link href="/torneos" className={styles.results} onClick={close}>
+          Resultados
+        </Link>
+
         <Link href="/#contacto" className={styles.cta}>
           Contacto
         </Link>

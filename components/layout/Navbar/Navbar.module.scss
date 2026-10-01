@@ -178,6 +178,41 @@
   }
 }
 
+// Acceso directo a torneos y resultados: relleno para que se distinga de
+// Contacto. En mobile queda visible en la barra, al lado del menú.
+.results {
+  @include flex-center;
+  @include transition(background-color);
+  flex-shrink: 0;
+  height: rem(48);
+  padding-inline: rem(28);
+  border-radius: $radius-sm;
+  background-color: $green-800;
+  font-family: $font-mono;
+  font-size: rem(13);
+  font-weight: $fw-medium;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: $cream-50;
+
+  &:hover {
+    background-color: $green-900;
+  }
+
+  @include mq-down(xl) {
+    padding-inline: rem(18);
+    font-size: rem(12);
+  }
+
+  @include mq-down(lg) {
+    height: rem(40);
+    margin-left: auto;
+    padding-inline: rem(14);
+    font-size: rem(11);
+  }
+}
+
 // Menú mobile --------------------------------------------------------------
 .toggle {
   display: none;
@@ -186,7 +221,6 @@
   gap: rem(7);
   width: rem(48);
   height: rem(48);
-  margin-left: auto;
   padding-inline: rem(12);
 
   span {

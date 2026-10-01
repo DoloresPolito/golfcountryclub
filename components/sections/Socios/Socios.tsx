@@ -28,14 +28,17 @@ export default function Socios() {
         </p>
 
         <Button
-          href={whatsappUrl()}
+          href={whatsappUrl({
+            mensaje:
+              "Hola, quisiera recibir información para ser socio del club.",
+          })}
           target="_blank"
           rel="noopener noreferrer"
           variant="moss"
           className={styles.button}
           data-reveal
         >
-          Hablar por WhatsApp
+          Solicitar información
           <ArrowRight />
         </Button>
       </div>

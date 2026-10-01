@@ -40,14 +40,18 @@ export default function Brooklyn() {
 
         <div data-reveal>
           <Button
-            href={whatsappUrl(TELEFONO)}
+            href={whatsappUrl({
+              numero: TELEFONO,
+              mensaje:
+                "Hola, quisiera hacer una reserva o un pedido para llevar.",
+            })}
             target="_blank"
             rel="noopener noreferrer"
             variant="gold"
             className={styles.button}
-            aria-label={`Reservar por WhatsApp al ${TELEFONO}`}
+            aria-label={`Reservas y take away por WhatsApp al ${TELEFONO}`}
           >
-            Reservar por WhatsApp
+            Reservas y take away
             <ArrowRight />
           </Button>
         </div>

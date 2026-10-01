@@ -24,7 +24,13 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: "Golf Country Club",
-  description: "Golf Country Club",
+  description:
+    "Gualeguaychú, Entre Ríos. Golf, pádel, pileta, colonia de vacaciones, resto bar y quincho para eventos.",
+  openGraph: {
+    siteName: "Golf Country Club",
+    locale: "es_AR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

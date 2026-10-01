@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
+import Instagram from "@/components/ui/Icons/Instagram";
 import WhatsApp from "@/components/ui/Icons/WhatsApp";
 import { whatsappUrl } from "@/data/contacto";
 import { SECCIONES } from "@/data/navegacion";
 import styles from "./Footer.module.scss";
 
+const INSTAGRAM_URL = "https://www.instagram.com/gchucountryclub/";
+
 const RESERVAS = [
-  { href: "/#reservas", label: "Book a tee time" },
   { href: "/torneos", label: "Torneos de golf" },
   { href: "/#padel", label: "Turnos de pádel" },
   { href: "/#quincho", label: "Quincho y salón" },
@@ -62,10 +64,20 @@ export default function Footer() {
             href={whatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.whatsapp}
+            className={styles.social}
           >
             <WhatsApp />
             Escribinos por WhatsApp
+            <ArrowRight className={styles.arrow} />
+          </a>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.social}
+          >
+            <Instagram />
+            Seguinos en Instagram
             <ArrowRight className={styles.arrow} />
           </a>
         </div>

@@ -62,8 +62,9 @@ $ball-overlap: $title-size * 0.36;
     will-change: translate, rotate;
   }
 
+  // En celular la proporción de desktop la deja muy chica: va más grande
   @include mq-down(md) {
-    width: math.div(88, $title-width-em) * 1.28cqi;
+    width: 42cqi;
     margin-top: math.div(88, $title-width-em) * -0.36cqi;
   }
 }

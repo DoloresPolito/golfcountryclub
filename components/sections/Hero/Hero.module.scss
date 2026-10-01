@@ -9,6 +9,10 @@ $title-size: math.div(100 - $title-side * 2, $title-width-em) * 1cqi;
 $title-line-height: 0.9;
 
 $content-top: 4cqi;
+// En celular el título y los botones bajan; la foto baja lo mismo para que
+// los botones sigan sobre el cielo y no encima del jugador
+$content-top-mobile: space(8);
+$mobile-shift: space(8) - space(4);
 $content-gap: 2cqi;
 $button-height: rem(52);
 
@@ -34,6 +38,10 @@ $button-height: rem(52);
   overflow: hidden;
   // Al scrollear la foto baja más lento que la página (ver Parallax)
   --parallax-range: 18%;
+
+  @include mq-down(md) {
+    top: calc(max(0px, #{rem(90)} - 5.6cqi) + #{$mobile-shift});
+  }
 
   // Lavado claro sobre el cielo: sólido arriba para fundirse con el fondo
   &::after {
@@ -75,6 +83,7 @@ $button-height: rem(52);
 
   @include mq-down(md) {
     gap: space(5);
+    padding-top: $content-top-mobile;
   }
 }
 

@@ -1,7 +1,6 @@
 @use "abstracts" as *;
 
 $text: $cream-50;
-$tag: #d9493a;
 
 .pileta {
   position: relative;
@@ -93,74 +92,27 @@ $tag: #d9493a;
 }
 
 .text {
+  @include body-text;
   max-width: 44ch;
   margin-top: space(4);
+}
+
+// Mismo lenguaje que el eyebrow de arriba: raya fina + texto chico
+.soon {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  margin-top: space(6);
   font-family: $font-mono;
   font-size: rem(13);
-  letter-spacing: 0.08em;
-  line-height: 1.5;
+  font-weight: $fw-medium;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-}
 
-.info {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: space(5);
-  margin-top: space(6);
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: space(3);
-  padding-inline: clamp(#{rem(20)}, 2.8cqi, #{rem(44)});
-
-  &:first-child {
-    padding-left: 0;
-  }
-
-  & + & {
-    border-left: 1px solid rgba($cream-100, 0.7);
-  }
-
-  @include mq-down(sm) {
-    width: 100%;
-    padding-inline: 0;
-
-    & + & {
-      padding-top: space(5);
-      border-top: 1px solid rgba($cream-100, 0.5);
-      border-left: 0;
-    }
-  }
-}
-
-.tag {
-  padding: rem(3) rem(9);
-  border-radius: $radius-sm;
-  background-color: $tag;
-  font-size: rem(12);
-  font-weight: $fw-bold;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: $white;
-}
-
-.value {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  font-size: rem(14);
-  letter-spacing: 0.03em;
-  line-height: 1.45;
-
-  strong {
-    font-weight: $fw-bold;
-    text-transform: uppercase;
-  }
-
-  span {
-    font-size: rem(13);
+  &::before {
+    content: "";
+    width: rem(56);
+    height: 1px;
+    background-color: currentColor;
   }
 }

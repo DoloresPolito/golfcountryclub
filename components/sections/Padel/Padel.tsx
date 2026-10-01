@@ -3,6 +3,9 @@ import Button from "@/components/ui/Button/Button";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
 import styles from "./Padel.module.scss";
 
+// Reserva de la cancha de pádel (YouCanBook.me)
+const RESERVAS_URL = "https://countryclub-canchadepadel.youcanbook.me/";
+
 export default function Padel() {
   return (
     <section id="padel" className={styles.padel}>
@@ -26,7 +29,9 @@ export default function Padel() {
       </p>
 
       <Button
-        href="#reservas"
+        href={RESERVAS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         variant="olive"
         className={styles.button}
         data-reveal

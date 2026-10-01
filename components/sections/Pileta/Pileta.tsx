@@ -9,7 +9,7 @@ export default function Pileta() {
         className={styles.bg}
         data-parallax="bg"
         data-reveal="zoom"
-        src="/images/pileta.png"
+        src="/images/pileta.jpeg"
         alt=""
         fill
         sizes="100vw"
@@ -36,24 +36,10 @@ export default function Pileta() {
           familia.
         </p>
 
-        <dl className={styles.info}>
-          <div className={styles.item} data-reveal>
-            <dt className={styles.tag}>Apertura</dt>
-            <dd className={styles.value}>15 de noviembre</dd>
-          </div>
-          <div className={styles.item} data-reveal>
-            <dt className={styles.tag}>Guardavidas</dt>
-            <dd className={styles.value}>de 15:30 a 20 hs</dd>
-          </div>
-          <div className={styles.item} data-reveal>
-            <dt className={styles.tag}>Valor</dt>
-            <dd className={styles.value}>
-              <strong>Socios gratis</strong>
-              <span>Invitados adultos: $2000</span>
-              <span>Invitados menores: $1000</span>
-            </dd>
-          </div>
-        </dl>
+        {/* Cuando haya fecha: "Apertura 15 de noviembre" y los valores */}
+        <p className={styles.soon} data-reveal>
+          Próximamente apertura
+        </p>
       </div>
     </section>
   );

@@ -111,8 +111,8 @@ export default function Navbar({
 
         <span className={styles.divider} aria-hidden="true" />
 
-        <Link href="/#reservas" className={styles.cta}>
-          Book a tee time
+        <Link href="/#contacto" className={styles.cta}>
+          Contacto
         </Link>
 
         <button
@@ -149,12 +149,12 @@ export default function Navbar({
           ))}
         </ul>
         <Link
-          href="/#reservas"
+          href="/#contacto"
           className={styles.menuCta}
           style={{ "--i": LINKS.length } as CSSProperties}
           onClick={close}
         >
-          Book a tee time
+          Contacto
         </Link>
       </div>
     </header>

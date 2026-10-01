@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button/Button";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
-import WhatsApp from "@/components/ui/Icons/WhatsApp";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
 import { whatsappUrl } from "@/data/contacto";
 import styles from "./Quincho.module.scss";
@@ -73,8 +72,6 @@ export default function Quincho() {
           className={styles.button}
           data-reveal
         >
-          <WhatsApp />
-          <span className={styles.sep} aria-hidden="true" />
           Consultar por WhatsApp
           <ArrowRight />
         </Button>

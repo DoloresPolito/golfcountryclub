@@ -5,13 +5,14 @@ $olive: #4f6236;
 $slide-size: clamp(#{rem(220)}, 25vw, #{rem(440)});
 $slide-gap: rem(8);
 
+// Al ir a #el-club la sección queda pegada arriba (sin franja del hero
+// alrededor de la navbar) y el padding deja el contenido debajo de la barra.
 .club {
-  padding-top: space(9);
+  padding-top: calc(#{$nav-sticky-top + $nav-height} + #{space(6)});
   padding-bottom: space(4);
   container-type: inline-size;
   background-color: $cream-100;
   color: $ink-900;
-  scroll-margin-top: $nav-sticky-top + $nav-height;
 }
 
 .inner {
@@ -56,13 +57,9 @@ $slide-gap: rem(8);
 }
 
 .text {
+  @include body-text;
   max-width: 52ch;
   margin-top: space(4);
-  font-family: $font-mono;
-  font-size: rem(12);
-  letter-spacing: 0.08em;
-  line-height: 1.5;
-  text-transform: uppercase;
 }
 
 .aside {
@@ -81,29 +78,29 @@ $slide-gap: rem(8);
 }
 
 // Carrusel --------------------------------------------------------------
+// Se mueve desde Carousel.tsx: avanza solo y se puede arrastrar
 .carousel {
   margin-top: space(7);
   overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y; // el scroll vertical en celular sigue funcionando
+  user-select: none;
+
+  &[data-dragging] {
+    cursor: grabbing;
+  }
 }
 
 .track {
   display: flex;
   width: max-content;
   margin: 0;
-  animation: marquee calc(var(--count) * 5s) linear infinite;
-
-  .carousel:hover & {
-    animation-play-state: paused;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
+  will-change: transform;
 }
 
 .slide {
   flex-shrink: 0;
-  // Padding en vez de gap para que -50% sea exactamente una vuelta
+  // Padding en vez de gap para que la mitad de la pista sea exactamente una vuelta
   padding-right: $slide-gap;
 }
 
@@ -129,10 +126,5 @@ $slide-gap: rem(8);
 
 .photo {
   object-fit: cover;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
+  pointer-events: none; // que el navegador no arrastre la imagen suelta
 }

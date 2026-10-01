@@ -115,12 +115,8 @@ $text: $cream-50;
 }
 
 .subtitle {
+  @include body-text;
   margin-top: space(4);
-  font-size: rem(12);
-  font-weight: $fw-medium;
-  letter-spacing: 0.28em;
-  line-height: 1.4;
-  text-transform: uppercase;
 
   &::after {
     content: "";
@@ -167,7 +163,7 @@ $text: $cream-50;
 }
 
 .button {
-  min-width: rem(290);
+  min-width: rem(220);
   margin-top: space(5);
   background-color: rgba(#3e5a2c, 0.75);
 
@@ -175,12 +171,4 @@ $text: $cream-50;
     align-self: stretch;
     min-width: 0;
   }
-}
-
-// Separador vertical entre ícono y texto
-.sep {
-  width: 1px;
-  height: rem(26);
-  background-color: currentColor;
-  opacity: 0.5;
 }

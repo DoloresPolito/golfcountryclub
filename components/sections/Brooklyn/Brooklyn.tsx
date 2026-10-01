@@ -1,12 +1,11 @@
 import Button from "@/components/ui/Button/Button";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
 import Clock from "@/components/ui/Icons/Clock";
-import WhatsApp from "@/components/ui/Icons/WhatsApp";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
 import { whatsappUrl } from "@/data/contacto";
 import styles from "./Brooklyn.module.scss";
 
-const TELEFONO = "+54 9 3446 123 456";
+const TELEFONO = "+54 9 3446 52-5335";
 
 export default function Brooklyn() {
   return (
@@ -48,8 +47,6 @@ export default function Brooklyn() {
             className={styles.button}
             aria-label={`Reservar por WhatsApp al ${TELEFONO}`}
           >
-            <WhatsApp />
-            <span className={styles.sep} aria-hidden="true" />
             Reservar por WhatsApp
             <ArrowRight />
           </Button>

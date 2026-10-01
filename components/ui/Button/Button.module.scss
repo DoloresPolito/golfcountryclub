@@ -77,45 +77,35 @@
   }
 }
 
-// Botones pill con ícono | texto → (sección Colonia) ------------------------
+// Botones con texto y flecha → (WhatsApp, inscripción) ----------------------
+// Misma forma que el botón base (el del hero), un poco más chicos.
 .moss,
 .cream,
 .gold {
-  justify-content: space-between;
-  gap: space(5);
-  min-height: rem(60);
-  padding-inline: rem(28);
-  border-radius: $radius-pill;
-  font-family: $font-sans;
-  font-size: rem(11);
-  font-weight: $fw-bold;
-  letter-spacing: 0.1em;
+  gap: space(3);
+  min-height: rem(44);
+  padding-inline: rem(26);
+  font-size: rem(13);
+
+  @include mq-down(sm) {
+    min-height: rem(42);
+    padding-inline: rem(18);
+    font-size: rem(12);
+  }
 
   svg {
     @include transition(transform);
     flex-shrink: 0;
-    font-size: rem(20);
-  }
-
-  // Última flecha
-  svg:last-child {
-    margin-left: auto;
-    font-size: rem(18);
+    font-size: rem(16);
   }
 
   &:hover svg:last-child {
     transform: translateX(3px);
   }
-
-  @include mq-down(sm) {
-    min-height: rem(54);
-    padding-inline: rem(20);
-    font-size: rem(10);
-  }
 }
 
 .moss {
-  border-color: rgba($cream-100, 0.7);
+  border-color: #4a6a35;
   background-color: #3e5a2c;
   color: $cream-50;
 

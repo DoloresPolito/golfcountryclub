@@ -2,10 +2,13 @@ import Image from "next/image";
 import Button from "@/components/ui/Button/Button";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
 import FileIcon from "@/components/ui/Icons/FileIcon";
-import WhatsApp from "@/components/ui/Icons/WhatsApp";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
 import { whatsappUrl } from "@/data/contacto";
 import styles from "./Colonia.module.scss";
+
+const TELEFONO = "+54 9 3446 55-9329";
+// Formulario de inscripción a la colonia (Google Forms)
+const INSCRIPCION_URL = "https://forms.gle/yHEGZF3ksLhWZKkX7";
 
 export default function Colonia() {
   return (
@@ -47,18 +50,22 @@ export default function Colonia() {
 
         <div className={styles.actions} data-reveal>
           <Button
-            href={whatsappUrl()}
+            href={whatsappUrl(TELEFONO)}
             target="_blank"
             rel="noopener noreferrer"
             variant="moss"
             className={styles.button}
           >
-            <WhatsApp />
-            <span className={styles.sep} aria-hidden="true" />
             Contactar por WhatsApp
             <ArrowRight />
           </Button>
-          <Button href="#inscripcion" variant="cream" className={styles.button}>
+          <Button
+            href={INSCRIPCION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="cream"
+            className={styles.button}
+          >
             <FileIcon />
             <span className={styles.sep} aria-hidden="true" />
             Inscripción

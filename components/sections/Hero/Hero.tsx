@@ -22,7 +22,7 @@ export default function Hero() {
           <RevealWords>Golf Country Club</RevealWords>
         </h1>
         <div className={styles.actions} data-reveal>
-          <Button href="#reservas">Book a tee time</Button>
+          <Button href="#contacto">Quiero ser socio</Button>
           <Button href="#el-club" variant="outline">
             Conocé el club
           </Button>

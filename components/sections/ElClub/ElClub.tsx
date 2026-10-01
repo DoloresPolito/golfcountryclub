@@ -1,7 +1,7 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
 import { galeriaClub, type Foto } from "@/data/galeria";
+import Carousel from "./Carousel";
 import styles from "./ElClub.module.scss";
 
 function Slide({ foto, hidden }: { foto: Foto; hidden?: boolean }) {
@@ -50,20 +50,15 @@ export default function ElClub() {
         </p>
       </div>
 
-      {/* Carrusel infinito: la lista se repite dos veces para que el loop no tenga cortes */}
-      <div
-        className={styles.carousel}
-        style={{ "--count": galeriaClub.length } as CSSProperties}
-      >
-        <ul className={styles.track} role="list">
-          {galeriaClub.map((foto, i) => (
-            <Slide key={`a-${i}`} foto={foto} />
-          ))}
-          {galeriaClub.map((foto, i) => (
-            <Slide key={`b-${i}`} foto={foto} hidden />
-          ))}
-        </ul>
-      </div>
+      {/* Carrusel infinito: la lista va dos veces para que el loop no tenga cortes */}
+      <Carousel count={galeriaClub.length}>
+        {galeriaClub.map((foto, i) => (
+          <Slide key={`a-${i}`} foto={foto} />
+        ))}
+        {galeriaClub.map((foto, i) => (
+          <Slide key={`b-${i}`} foto={foto} hidden />
+        ))}
+      </Carousel>
     </section>
   );
 }

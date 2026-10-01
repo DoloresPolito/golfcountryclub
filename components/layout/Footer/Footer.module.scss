@@ -59,12 +59,8 @@ $line: rgba($ink-950, 0.18);
 }
 
 .tagline {
+  @include body-text;
   max-width: 22ch;
-  font-size: rem(12);
-  font-weight: $fw-medium;
-  letter-spacing: 0.16em;
-  line-height: 1.7;
-  text-transform: uppercase;
 }
 
 .col {
@@ -129,7 +125,8 @@ $line: rgba($ink-950, 0.18);
   }
 }
 
-.whatsapp {
+// Botones de WhatsApp e Instagram
+.social {
   @include transition(background-color, color);
   display: inline-flex;
   align-items: center;

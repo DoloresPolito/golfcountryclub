@@ -70,17 +70,13 @@ $text: $ink-900;
 }
 
 .text {
+  @include body-text;
   max-width: 26ch;
-  font-size: rem(12);
-  font-weight: $fw-medium;
-  letter-spacing: 0.16em;
-  line-height: 1.7;
-  text-transform: uppercase;
 }
 
 .button {
   justify-self: end;
-  min-width: rem(290);
+  min-width: rem(220);
 
   @include mq-down(lg) {
     justify-self: start;
@@ -91,12 +87,4 @@ $text: $ink-900;
     justify-self: stretch;
     min-width: 0;
   }
-}
-
-// Separador vertical entre ícono y texto
-.sep {
-  width: 1px;
-  height: rem(26);
-  background-color: currentColor;
-  opacity: 0.5;
 }

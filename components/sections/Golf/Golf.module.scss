@@ -83,12 +83,9 @@ $line: rgba($cream-100, 0.35);
 }
 
 .text {
+  @include body-text;
   max-width: 34ch;
   margin-top: space(4);
-  font-family: $font-mono;
-  font-size: rem(13);
-  line-height: 1.45;
-  text-transform: uppercase;
 }
 
 .button {

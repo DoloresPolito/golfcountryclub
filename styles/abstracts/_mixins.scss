@@ -3,6 +3,7 @@
 // ==========================================================================
 @use "sass:map";
 @use "variables" as *;
+@use "functions" as *;
 
 // Media query mobile-first: @include mq(md) { ... }
 @mixin mq($bp) {
@@ -55,4 +56,15 @@
   transition-property: $props;
   transition-duration: $duration;
   transition-timing-function: $ease-out;
+}
+
+// Texto descriptivo de las secciones (el de Golf es la referencia).
+// Mismo estilo en todos para que la página se lea pareja.
+@mixin body-text {
+  font-family: $font-mono;
+  font-size: rem(13);
+  font-weight: $fw-regular;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: uppercase;
 }

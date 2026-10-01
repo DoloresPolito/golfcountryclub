@@ -71,13 +71,9 @@ $text: $cream-50;
 }
 
 .activities {
+  @include body-text;
   max-width: 44ch;
   margin-top: space(4);
-  font-size: clamp(#{rem(12)}, 0.95cqi, #{rem(14)});
-  font-weight: $fw-bold;
-  letter-spacing: 0.16em;
-  line-height: 1.55;
-  text-transform: uppercase;
 
   &::after {
     content: "";
@@ -120,10 +116,10 @@ $text: $cream-50;
 }
 
 .button {
-  min-width: rem(290);
+  min-width: rem(230);
 
   &:last-child {
-    min-width: rem(250);
+    min-width: rem(200);
   }
 
   @include mq-down(sm) {

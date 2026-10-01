@@ -1,6 +1,5 @@
 import Button from "@/components/ui/Button/Button";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
-import WhatsApp from "@/components/ui/Icons/WhatsApp";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
 import { whatsappUrl } from "@/data/contacto";
 import styles from "./Socios.module.scss";
@@ -36,8 +35,6 @@ export default function Socios() {
           className={styles.button}
           data-reveal
         >
-          <WhatsApp />
-          <span className={styles.sep} aria-hidden="true" />
           Hablar por WhatsApp
           <ArrowRight />
         </Button>

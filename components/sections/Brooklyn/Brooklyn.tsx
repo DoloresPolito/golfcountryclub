@@ -7,6 +7,14 @@ import styles from "./Brooklyn.module.scss";
 
 const TELEFONO = "+54 9 3446 52-5335";
 
+const HORARIOS = [
+  { dia: "Lunes y martes", horario: "11:30 – 14:00 y 17:30 – 22:00" },
+  { dia: "Miércoles", horario: "Cerrado" },
+  { dia: "Jueves y viernes", horario: "11:30 – 14:00 y 17:30 – 22:00" },
+  { dia: "Sábado", horario: "11:30 – 22:00" },
+  { dia: "Domingo", horario: "Desde la tarde hasta las 22:00" },
+];
+
 export default function Brooklyn() {
   return (
     <section id="brooklyn" className={styles.brooklyn}>
@@ -30,11 +38,14 @@ export default function Brooklyn() {
           <Clock className={styles.icon} />
           <div>
             <h3 className={styles.label}>Horarios</h3>
-            <p className={styles.value}>
-              Mar – Dom
-              <br />
-              12:00 – 00:00
-            </p>
+            <dl className={styles.value}>
+              {HORARIOS.map(({ dia, horario }) => (
+                <div key={dia} className={styles.row}>
+                  <dt>{dia}</dt>
+                  <dd>{horario}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 

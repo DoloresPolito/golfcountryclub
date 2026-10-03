@@ -209,6 +209,11 @@ export const torneos: Torneo[] = [
     ],
   },
   {
+    slug: "torneo-beneficio-conin",
+    nombre: "Torneo a beneficio de CONIN Promover GCHÚ",
+    fecha: "2026-10-10",
+  },
+  {
     slug: "copa-nandubay",
     nombre: "Copa Ñandubay",
     fecha: "2026-10-31",

@@ -1,0 +1,55 @@
+@use "abstracts" as *;
+
+$text: $green-900;
+$line: rgba($green-900, 0.14);
+
+.comision {
+  padding-block: space(9);
+  container-type: inline-size;
+  background-color: $cream-50;
+  color: $text;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: space(9);
+  padding-inline: clamp(#{rem(20)}, 6cqi, #{rem(100)});
+}
+
+.groupTitle {
+  padding-bottom: space(3);
+  border-bottom: 1px solid rgba($green-900, 0.6);
+  font-family: $font-mono;
+  font-size: rem(14);
+  font-weight: $fw-medium;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: $text;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(#{rem(220)}, 1fr));
+  column-gap: clamp(#{rem(16)}, 3cqi, #{rem(48)});
+}
+
+.card {
+  padding-block: space(5);
+  border-bottom: 1px solid $line;
+}
+
+.cargo {
+  font-size: rem(10);
+  font-weight: $fw-medium;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $gold-600;
+}
+
+.nombre {
+  margin-top: space(2);
+  font-size: clamp(#{rem(18)}, 1.6cqi, #{rem(24)});
+  line-height: 1.15;
+  color: $text;
+}

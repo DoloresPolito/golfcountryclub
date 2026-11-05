@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button/Button";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
 import RevealWords from "@/components/ui/RevealWords/RevealWords";
-import { formatFecha, getProximosTorneos } from "@/data/torneos";
+import { formatDias, formatFecha, getProximosTorneos } from "@/data/torneos";
 import styles from "./Golf.module.scss";
 
 export default function Golf() {
@@ -67,6 +67,7 @@ export default function Golf() {
           <ul className={styles.list} role="list">
             {proximosTorneos.map((torneo) => {
               const { mes, dia, semana } = formatFecha(torneo.fecha);
+              const dias = formatDias(torneo);
               return (
                 <li key={torneo.slug} className={styles.item} data-reveal>
                   <time className={styles.date} dateTime={torneo.fecha}>
@@ -76,8 +77,10 @@ export default function Golf() {
                   </time>
                   <div className={styles.info}>
                     <h4 className={styles.name}>{torneo.nombre}</h4>
-                    {(torneo.modalidad || torneo.hoyos) && (
+                    {(dias || torneo.modalidad || torneo.hoyos) && (
                       <p className={styles.meta}>
+                        {dias}
+                        {dias && (torneo.modalidad || torneo.hoyos) && <br />}
                         {torneo.modalidad}
                         {torneo.modalidad && torneo.hoyos && <br />}
                         {torneo.hoyos && `${torneo.hoyos} hoyos`}

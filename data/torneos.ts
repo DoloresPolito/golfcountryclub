@@ -34,6 +34,7 @@ export type Torneo = {
   slug: string;
   nombre: string;
   fecha: string; // ISO: AAAA-MM-DD
+  fechaFin?: string; // último día, si el torneo dura más de uno
   modalidad?: string;
   hoyos?: number;
   resultados?: Categoria[];
@@ -216,7 +217,8 @@ export const torneos: Torneo[] = [
   {
     slug: "copa-nandubay",
     nombre: "Copa Ñandubay",
-    fecha: "2026-10-31",
+    fecha: "2026-11-07",
+    fechaFin: "2026-11-08",
     hoyos: 18,
   },
   {
@@ -233,9 +235,9 @@ const hoyIso = (hoy = new Date()) =>
     timeZone: "America/Argentina/Buenos_Aires",
   });
 
-// Un torneo cuenta como jugado recién al día siguiente
+// Un torneo cuenta como jugado recién al día siguiente (del último día)
 export const yaSeJugo = (torneo: Torneo, hoy?: Date) =>
-  torneo.fecha < hoyIso(hoy);
+  (torneo.fechaFin ?? torneo.fecha) < hoyIso(hoy);
 
 // Los torneos que todavía no se jugaron (incluye los de hoy)
 export const getProximosTorneos = (cantidad = 3, hoy?: Date) =>
@@ -254,4 +256,16 @@ export const formatFecha = (iso: string) => {
     semana: parte({ weekday: "short" }),
     completa: parte({ weekday: "long", day: "numeric", month: "long" }),
   };
+};
+
+// Para torneos de más de un día, ej. "Sábado 7 y domingo 8"
+export const formatDias = (torneo: Torneo) => {
+  if (!torneo.fechaFin) return undefined;
+  const dia = (iso: string) =>
+    new Date(`${iso}T12:00:00`).toLocaleDateString("es-AR", {
+      weekday: "long",
+      day: "numeric",
+    }).replace(",", "");
+  const texto = `${dia(torneo.fecha)} y ${dia(torneo.fechaFin)}`;
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
 };

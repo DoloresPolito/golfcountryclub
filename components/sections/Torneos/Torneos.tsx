@@ -1,10 +1,11 @@
 import Link from "next/link";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
-import { formatFecha, torneos, yaSeJugo, type Torneo } from "@/data/torneos";
+import { formatDias, formatFecha, torneos, yaSeJugo, type Torneo } from "@/data/torneos";
 import styles from "./Torneos.module.scss";
 
 function Fila({ torneo, jugado }: { torneo: Torneo; jugado: boolean }) {
   const { mes, dia, semana } = formatFecha(torneo.fecha);
+  const dias = formatDias(torneo);
   const resultados = torneo.resultados;
 
   return (
@@ -17,7 +18,13 @@ function Fila({ torneo, jugado }: { torneo: Torneo; jugado: boolean }) {
 
       <div className={styles.info}>
         <h3 className={styles.name}>{torneo.nombre}</h3>
-        {torneo.hoyos && <p className={styles.meta}>{torneo.hoyos} hoyos</p>}
+        {(dias || torneo.hoyos) && (
+          <p className={styles.meta}>
+            {[dias, torneo.hoyos && `${torneo.hoyos} hoyos`]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        )}
 
         {/* Ganador de cada categoría */}
         {resultados && (

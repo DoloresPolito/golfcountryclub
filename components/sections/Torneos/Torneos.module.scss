@@ -98,12 +98,37 @@ $line: rgba($green-900, 0.14);
   opacity: 0.7;
 }
 
-// Ganadores por categoría
+// Ganadores por categoría: columnas parejas (Caballeros, Damas, Scratch)
 .winners {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: space(5) space(7);
+  margin-top: space(4);
+
+  @include mq-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mq-down(sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.winnerGroupTitle {
+  padding-bottom: space(2);
+  margin-bottom: space(3);
+  border-bottom: 1px solid $line;
+  font-family: $font-mono;
+  font-size: rem(11);
+  font-weight: $fw-medium;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.winnerList {
   display: flex;
-  flex-wrap: wrap;
-  gap: space(3) space(7);
-  margin: space(4) 0 0;
+  flex-direction: column;
+  margin: 0;
 
   dt {
     font-size: rem(10);
@@ -122,6 +147,13 @@ $line: rgba($green-900, 0.14);
     font-size: rem(15);
     font-weight: $fw-semibold;
   }
+}
+
+// Línea suave entre un ganador y el siguiente
+.winner + .winner {
+  padding-top: space(3);
+  margin-top: space(3);
+  border-top: 1px solid rgba($green-900, 0.08);
 }
 
 .score {

@@ -42,6 +42,19 @@ export default function Colonia() {
         <p className={styles.lead} data-reveal>
           A cargo de <strong>Stella Manzo.</strong>
         </p>
+        <p className={styles.dates} data-reveal>
+          <time className={styles.date} dateTime="2026-12-01">
+            <span className={styles.dateLabel}>Desde</span>
+            <span className={styles.day}>01</span>
+            <span className={styles.month}>Dic 2026</span>
+          </time>
+          <span className={styles.datesLine} aria-hidden="true" />
+          <time className={styles.date} dateTime="2027-02-15">
+            <span className={styles.dateLabel}>Hasta</span>
+            <span className={styles.day}>15</span>
+            <span className={styles.month}>Feb 2027</span>
+          </time>
+        </p>
         <p className={styles.text} data-reveal>
           Contamos con seguro y guardavidas.
           <br />

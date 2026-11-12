@@ -219,7 +219,88 @@ export const torneos: Torneo[] = [
     nombre: "Copa Ñandubay",
     fecha: "2026-11-07",
     fechaFin: "2026-11-08",
-    hoyos: 18,
+    hoyos: 36,
+    resultados: [
+      {
+        grupo: "Caballeros",
+        nombre: "Hándicap 25,5 a 54",
+        jugadores: [
+          { jugador: "Escuder Guillermo Rodolfo", neto: 137 },
+          { jugador: "Drabble José", neto: 141 },
+        ],
+      },
+      {
+        grupo: "Caballeros",
+        nombre: "Hándicap 16,5 a 24,4",
+        jugadores: [
+          { jugador: "Daroca Santiago", neto: 141 },
+          { jugador: "De Castro Gonzalo", neto: 142 },
+        ],
+      },
+      {
+        grupo: "Caballeros",
+        nombre: "Hándicap 9,5 a 16,4",
+        jugadores: [
+          { jugador: "Andrade Abel Marcelo", neto: 136 },
+          { jugador: "Berasategui Facundo", neto: 144 },
+        ],
+      },
+      {
+        grupo: "Caballeros",
+        nombre: "Hándicap 0 a 9,4",
+        jugadores: [
+          { jugador: "Irigoitia Isaías Enrique J.", neto: 143 },
+          { jugador: "Pérez Néstor Daniel", neto: 149 },
+        ],
+      },
+      {
+        grupo: "Damas",
+        nombre: "Hándicap 28,1 a 54",
+        jugadores: [
+          { jugador: "Irigoyen Cecilia", neto: 131 },
+          { jugador: "Giménez Mirta Mariel", neto: 149 },
+        ],
+      },
+      {
+        grupo: "Damas",
+        nombre: "Hándicap 0 a 28",
+        jugadores: [
+          { jugador: "Court de Rafaetta María Marta", neto: 145 },
+          { jugador: "De Zan María Fabiana", neto: 153 },
+        ],
+      },
+      {
+        grupo: "Scratch",
+        nombre: "Caballeros",
+        jugadores: [{ jugador: "Di Sabatto Roberto Oscar", gross: 144 }],
+      },
+      {
+        grupo: "Scratch",
+        nombre: "Damas",
+        jugadores: [{ jugador: "Schultheis Silvina", gross: 190 }],
+      },
+    ],
+    premios: [
+      {
+        premio: "Approach caballeros",
+        jugador: "Salazar Capon Fernando",
+        detalle: "3,22 m",
+      },
+      { premio: "Long drive caballeros", jugador: "De Zan Luis" },
+      { premio: "Long drive damas", jugador: "Schultheis Silvina" },
+      {
+        premio: "Pre-Senior (45 a 54 años)",
+        jugador: "Massaferro Lucio",
+      },
+      { premio: "Senior (más de 54 años)", jugador: "Burgos Luis Alberto" },
+      { premio: "Lady (más de 50 años)", jugador: "Boari Ángela María" },
+      { premio: "Últimos 18 hoyos (neto)", jugador: "Daroca Ezequiel" },
+      {
+        premio: "Equipo ganador",
+        jugador:
+          "Di Sabatto Roberto Oscar, Irigoitia Isaías Enrique J., Burgos Luis Alberto y Franchini Juan Luis",
+      },
+    ],
   },
   {
     slug: "torneo-clausura",

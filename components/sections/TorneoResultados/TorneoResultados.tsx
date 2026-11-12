@@ -6,7 +6,7 @@ const valor = (n?: number) => (n === undefined ? "–" : n);
 
 // Planilla completa: tiene ida, vuelta, gross… de cada jugador
 const esPlanilla = (categoria: Categoria) =>
-  categoria.jugadores.some((j) => j.gross !== undefined);
+  categoria.jugadores.some((j) => j.ida !== undefined);
 
 function Planilla({ categoria }: { categoria: Categoria }) {
   const podio = categoria.jugadores.filter((j) => j.gross).slice(0, 3);
@@ -79,8 +79,12 @@ function Resumen({ categoria }: { categoria: Categoria }) {
           <li key={j.jugador} className={styles.resumenItem}>
             <span className={styles.resumenNum}>{i + 1}</span>
             <span className={styles.resumenName}>{j.jugador}</span>
-            {j.neto !== undefined && (
+            {j.neto !== undefined ? (
               <span className={styles.resumenScore}>Neto {j.neto}</span>
+            ) : (
+              j.gross !== undefined && (
+                <span className={styles.resumenScore}>Gross {j.gross}</span>
+              )
             )}
           </li>
         ))}

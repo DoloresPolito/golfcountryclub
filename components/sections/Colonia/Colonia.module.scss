@@ -96,6 +96,51 @@ $text: $cream-50;
   }
 }
 
+// Fechas de la temporada, debajo de "A cargo de…"
+.dates {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  margin-top: space(5);
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dateLabel {
+  margin-bottom: space(1);
+  font-size: rem(10);
+  font-weight: $fw-semibold;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.day {
+  font-family: $font-display;
+  font-size: rem(44);
+  line-height: 0.9;
+  color: $text;
+}
+
+.month {
+  margin-top: space(1);
+  font-size: rem(10);
+  font-weight: $fw-semibold;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.datesLine {
+  width: rem(48);
+  height: 1px;
+  background-color: currentColor;
+}
+
 .text {
   margin-top: space(3);
   font-size: rem(13);

@@ -1,7 +1,26 @@
 import Link from "next/link";
 import ArrowRight from "@/components/ui/Icons/ArrowRight";
-import { formatDias, formatFecha, torneos, yaSeJugo, type Torneo } from "@/data/torneos";
+import {
+  formatDias,
+  formatFecha,
+  torneos,
+  yaSeJugo,
+  type Categoria,
+  type Torneo,
+} from "@/data/torneos";
 import styles from "./Torneos.module.scss";
+
+// Junta las categorías por `grupo` (Caballeros, Damas, Scratch…) en su orden
+const agrupar = (categorias: Categoria[]) =>
+  categorias.reduce<{ grupo?: string; categorias: Categoria[] }[]>(
+    (acc, categoria) => {
+      const existente = acc.find((g) => g.grupo === categoria.grupo);
+      if (existente) existente.categorias.push(categoria);
+      else acc.push({ grupo: categoria.grupo, categorias: [categoria] });
+      return acc;
+    },
+    [],
+  );
 
 function Fila({ torneo, jugado }: { torneo: Torneo; jugado: boolean }) {
   const { mes, dia, semana } = formatFecha(torneo.fecha);
@@ -26,31 +45,39 @@ function Fila({ torneo, jugado }: { torneo: Torneo; jugado: boolean }) {
           </p>
         )}
 
-        {/* Ganador de cada categoría */}
+        {/* Ganador de cada categoría, una columna por grupo */}
         {resultados && (
-          <dl className={styles.winners}>
-            {resultados.map((categoria) => {
-              const ganador = categoria.jugadores[0];
-              return (
-                <div
-                  key={`${categoria.grupo}-${categoria.nombre}`}
-                  className={styles.winner}
-                >
-                  <dt>
-                    {[categoria.grupo, categoria.nombre]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </dt>
-                  <dd>
-                    {ganador.jugador}
-                    {ganador.neto !== undefined && (
-                      <span className={styles.score}>Neto {ganador.neto}</span>
-                    )}
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
+          <div className={styles.winners}>
+            {agrupar(resultados).map(({ grupo, categorias }) => (
+              <div key={grupo ?? "general"} className={styles.winnerGroup}>
+                {grupo && <p className={styles.winnerGroupTitle}>{grupo}</p>}
+                <dl className={styles.winnerList}>
+                  {categorias.map((categoria) => {
+                    const ganador = categoria.jugadores[0];
+                    return (
+                      <div key={categoria.nombre} className={styles.winner}>
+                        <dt>{categoria.nombre}</dt>
+                        <dd>
+                          {ganador.jugador}
+                          {ganador.neto !== undefined ? (
+                            <span className={styles.score}>
+                              Neto {ganador.neto}
+                            </span>
+                          ) : (
+                            ganador.gross !== undefined && (
+                              <span className={styles.score}>
+                                Gross {ganador.gross}
+                              </span>
+                            )
+                          )}
+                        </dd>
+                      </div>
+                    );
+                  })}
+                </dl>
+              </div>
+            ))}
+          </div>
         )}
       </div>
 
